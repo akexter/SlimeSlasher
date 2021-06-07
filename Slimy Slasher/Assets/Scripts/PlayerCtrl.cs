@@ -8,10 +8,10 @@ public class PlayerCtrl : MonoBehaviour
 
     public float speed;
     public float jumpForce;
-    public float distanceGround;
-    public Vector3 Checkpoint;
-
+    public Vector2 checkPoint;
     float move;
+
+    public bool Bounce = false;
 
     public LayerMask layerMask;
 
@@ -22,9 +22,9 @@ public class PlayerCtrl : MonoBehaviour
 
     void Start()
     {
+        DontDestroyOnLoad(transform.gameObject);
         rb = GetComponent<Rigidbody2D>();
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
-        distanceGround = GetComponent<Collider2D>().bounds.extents.y;
         Player = GameObject.Find("Player");
     }
 
@@ -34,15 +34,29 @@ public class PlayerCtrl : MonoBehaviour
         rb.velocity = (new Vector2(speed * move, rb.velocity.y));
 
         Jump();
+
+        if(Bounce == true)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 0f);
+            rb.AddForce(new Vector2(0f, jumpForce / 2));
+            Bounce = false;
+        }
     }
     void Jump()
     {
 
-        if (Input.GetKeyDown(KeyCode.Space)) // sends a raycast down to check if it hits anything
-        {
-            RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), Vector2.down, Mathf.Infinity, layerMask);
+        RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), Vector2.down, Mathf.Infinity, layerMask);
+        RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(transform.position.x + 1f, transform.position.y), Vector2.down, Mathf.Infinity, layerMask);
+        RaycastHit2D hit3 = Physics2D.Raycast(new Vector2(transform.position.x - 1f, transform.position.y), Vector2.down, Mathf.Infinity, layerMask);
 
-            if (hit.distance <= distanceGround + 0.05f)
+        if (hit2.distance <= 0.55f && hit2.distance > 0 && hit3.distance <= 0.55f && hit3.distance > 0) // sets where the player should teleport to if they die
+        {
+            checkPoint = gameObject.transform.position;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (hit.distance <= 0.55f && hit.distance > 0)
             {
                 rb.velocity = new Vector2(rb.velocity.x, 0f);
                 rb.AddForce(new Vector2(0f, jumpForce));
@@ -66,9 +80,14 @@ public class PlayerCtrl : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
 
-        if (other.gameObject.CompareTag("checkpoint")) // changes the location that the player respawns at
+        if (other.gameObject.CompareTag("checkpoint"))
         {
-            Checkpoint = other.GetComponent<Transform>().position;
+            checkPoint = other.GetComponent<Transform>().position;
+        }
+
+        if (other.gameObject.CompareTag("spikes"))
+        {
+            gameObject.transform.position = checkPoint;
         }
     }
     public void ChangeScene(string name)

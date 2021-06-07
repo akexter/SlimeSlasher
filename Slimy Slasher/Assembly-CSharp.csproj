@@ -56,12 +56,15 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\CameraFollower.cs" />
     <Compile Include="Assets\MetroidvaniaController\Scripts\Player\ThrowableWeapon.cs" />
     <Compile Include="Assets\MetroidvaniaController\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\MetroidvaniaController\Animation\Scripts\EndParamBehaviour.cs" />
     <Compile Include="Assets\Scripts\Jump.cs" />
+    <Compile Include="Assets\Scripts\Weapon.cs" />
     <Compile Include="Assets\MetroidvaniaController\Scripts\Player\CharacterController2D.cs" />
     <Compile Include="Assets\MetroidvaniaController\Scripts\Player\Attack.cs" />
+    <Compile Include="Assets\Scripts\Slash.cs" />
     <Compile Include="Assets\MetroidvaniaController\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\MetroidvaniaController\Scripts\Player\CameraFollow.cs" />
     <Compile Include="Assets\MetroidvaniaController\Scripts\Environment\Grass.cs" />
@@ -76,6 +79,7 @@
     <Compile Include="Assets\Wolv Interactive\Pixel Perfect Retro Camera\Scenes\Example\MoveCamera.cs" />
     <Compile Include="Assets\MetroidvaniaController\Scripts\Enemies\Ally.cs" />
     <Compile Include="Assets\Wolv Interactive\Pixel Perfect Retro Camera\Scenes\Example\Spin.cs" />
+    <Compile Include="Assets\Scripts\Bounce.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Wolv Interactive\Pixel Perfect Retro Camera\Readme.txt" />

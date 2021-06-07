@@ -5,18 +5,20 @@ TagManager:
   serializedVersion: 2
   tags:
   - platform
+  - spikes
+  - checkpoint
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Floor
+  - floor
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - attack
+  - player
+  - enemy
+  - spikes
+  - platform
   - 
   - 
   - 
