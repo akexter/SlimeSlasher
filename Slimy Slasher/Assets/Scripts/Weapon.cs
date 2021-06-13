@@ -5,18 +5,17 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public GameObject weaponPrefab;
-    public bool CanAttack;
+    public bool canAttack;
     void Start()
     {
-        CanAttack = true;
+        canAttack = false;
     }
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && CanAttack == true)
+        if (Input.GetMouseButtonDown(0) && canAttack == true)
         {
             Instantiate(weaponPrefab, transform.position, transform.rotation);
-            CanAttack = false;
+            canAttack = false;
         }
-
     }
 }
