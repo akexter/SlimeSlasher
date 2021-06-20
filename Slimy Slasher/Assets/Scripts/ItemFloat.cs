@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class ItemFloat : MonoBehaviour
 {
+    float startPos;
     void Start()
     {
-        
+        startPos = transform.position.y;
     }
     void Update()
     {
-        transform.position = new Vector3(transform.position.x, transform.position.y + (Mathf.PingPong(1f, 5)), transform.position.z);
-        transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y, transform.position.z + Time.deltaTime, transform.rotation.w);
+        transform.position = new Vector2(transform.position.x, startPos + (Mathf.Sin(Time.time) / 4));
     }
 }
