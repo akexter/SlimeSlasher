@@ -11,6 +11,7 @@ TagManager:
   - item
   - secret
   - transparentfloor
+  - floor
   layers:
   - Default
   - TransparentFX
@@ -48,6 +49,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Above
+  - name: Background
+    uniqueID: 3502447651
+    locked: 0
+  - name: Transparent Floor
     uniqueID: 3802863495
+    locked: 0
+  - name: Floor
+    uniqueID: 1466709345
+    locked: 0
+  - name: Player
+    uniqueID: 2701586409
+    locked: 0
+  - name: UI
+    uniqueID: 392580067
+    locked: 0
+  - name: IsHitScreen
+    uniqueID: 3338136583
     locked: 0
