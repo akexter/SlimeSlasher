@@ -14,6 +14,6 @@ public class BackgroundFollow : MonoBehaviour
 
     void Update()
     {
-        transform.localPosition = new Vector3(-Target.transform.position.x / 5, -Target.transform.position.y / 5, gameObject.transform.position.z);
+        transform.localPosition = new Vector3(-Target.transform.position.x/10, -Target.transform.position.y/10, transform.position.z);
     }
 }

@@ -7,6 +7,7 @@ public class Slash : MonoBehaviour
     public float timer;
     public GameObject Player;
     public LayerMask layerMask;
+    public float angle;
 
     void Start()
     {
@@ -20,25 +21,24 @@ public class Slash : MonoBehaviour
         mousePos.x = mousePos.x - objectPos.x;
         mousePos.y = mousePos.y - objectPos.y;
 
-        float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
+        angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
         transform.Translate(1, 0, 0);
 
-        if (transform.rotation.z >= -0.9 && transform.rotation.z <= -0.4)
+        if (angle >= -112.5 && angle <= -67.5)
         {
             GetComponentInParent<PlayerCtrl>().canBounce = true;
         }
 
+        Player.GetComponent<PlayerAnim>().angle = angle;
     }
     void Update()
     {
-
         timer += Time.deltaTime;
 
         if (timer >= 0.25)
         {
-            Player.GetComponent<Weapon>().canAttack = true;
             Destroy(gameObject);
         }
     }

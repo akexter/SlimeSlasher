@@ -11,9 +11,9 @@ public class TheCube : MonoBehaviour
         startPos = transform.position.y;
         player = GameObject.Find("Player");
     }
-    void Update()
+    void FixedUpdate()
     {
         transform.position = new Vector2(transform.position.x, startPos + (Mathf.Sin(Time.time) / 4));
-        transform.rotation = new Quaternion((Mathf.Sin(Time.time)), (Mathf.Sin(Time.time)), 0, transform.rotation.w);
+        gameObject.transform.Rotate(0f, 2f, 2f, Space.World);
     }
 }

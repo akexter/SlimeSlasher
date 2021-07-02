@@ -1,2 +1,0 @@
-F:\Slimy Slasher\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
-F:\Slimy Slasher\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache

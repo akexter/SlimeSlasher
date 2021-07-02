@@ -10,7 +10,7 @@ public class PlayerCtrl : MonoBehaviour
     public float jumpForce;
     public Vector2 checkPoint;
     float dash;
-    float lastDirection;
+    public float lastDirection;
     float lastHit;
     float goThroughPlatform;
 
@@ -37,6 +37,7 @@ public class PlayerCtrl : MonoBehaviour
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
         Player = GameObject.Find("Player");
         canDash = true;
+        lastDirection = 1;
         speed = 4;
     }
 
@@ -52,9 +53,13 @@ public class PlayerCtrl : MonoBehaviour
             rb.velocity = (new Vector2(0, 0));
         }
 
-        if (Input.GetAxis("Horizontal") == 1 || Input.GetAxis("Horizontal") == -1) // Records the player's last horizontal direction to use when dashing
+        if (rb.velocity.x > 0)
         {
-            lastDirection = Input.GetAxis("Horizontal");
+            lastDirection = 1;
+        }
+        if (rb.velocity.x < 0) // Records the player's last horizontal direction
+        {
+            lastDirection = -1;
         }
 
         RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), Vector2.down, Mathf.Infinity, layerMask);
@@ -85,11 +90,13 @@ public class PlayerCtrl : MonoBehaviour
     }
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && fixedVelocity == false)
         {
             RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), Vector2.down, Mathf.Infinity, layerMask);
+            RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(transform.position.x + 0.125f, transform.position.y), Vector2.down, Mathf.Infinity, layerMask);
+            RaycastHit2D hit3 = Physics2D.Raycast(new Vector2(transform.position.x - 0.125f, transform.position.y), Vector2.down, Mathf.Infinity, layerMask);
 
-            if (hit.distance <= 0.51f && hit.distance > 0)
+            if (hit.distance <= 0.51f && hit.distance > 0 || hit2.distance <= 0.51f && hit2.distance > 0 || hit3.distance <= 0.51f && hit3.distance > 0) // Intiates the jump
             {
                 rb.velocity = new Vector2(rb.velocity.x, 0f);
                 rb.AddForce(new Vector2(0f, jumpForce));
@@ -98,14 +105,18 @@ public class PlayerCtrl : MonoBehaviour
     }
     void Dash()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) | Input.GetKeyDown(KeyCode.RightShift) && canDash == true) // Dash
+        if (Input.GetKeyDown(KeyCode.LeftShift) | Input.GetKeyDown(KeyCode.RightShift) && canDash == true) // Initiates the dash
         {
-            rb.velocity = new Vector2(0f, 0f);
-            rb.AddForce(new Vector2(jumpForce * lastDirection, 0f));
-            rb.gravityScale = 0f;
-            dash = Time.time;
+            if (Input.GetAxis("Horizontal") == 1 || Input.GetAxis("Horizontal") == -1)
+            {
+                lastDirection = Input.GetAxis("Horizontal");
+            }
+
             canDash = false;
             fixedVelocity = true;
+            rb.velocity = new Vector2(16f * lastDirection, 0f);
+            rb.gravityScale = 0f;
+            dash = Time.time;
         }
 
         if (Time.time >= dash + 0.25f && canDash == false) // Ends the dash
@@ -173,6 +184,7 @@ public class PlayerCtrl : MonoBehaviour
         {
             if (other.gameObject.name == "SlashObtainer")
             {
+                GetComponent<Weapon>().weaponUnlocked = true;
                 GetComponent<Weapon>().canAttack = true;
             }
             other.gameObject.GetComponent<ItemDisappear>().isTriggered = true;
