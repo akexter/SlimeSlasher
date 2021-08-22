@@ -9,11 +9,11 @@ public class BackgroundFollow : MonoBehaviour
     void Start()
     {
         Target = GameObject.Find("Player");
-        gameObject.transform.parent = Target.transform;
     }
 
     void Update()
     {
-        transform.localPosition = new Vector3(-Target.transform.position.x/10, -Target.transform.position.y/10, transform.position.z);
+            gameObject.transform.parent = Target.transform;
+            transform.localPosition = new Vector3(-Target.transform.position.x / 10, -Target.transform.position.y / 10, transform.position.z);
     }
 }

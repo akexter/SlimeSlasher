@@ -18,17 +18,17 @@ public class PlayerAnim : MonoBehaviour
 
     void Update()
     {
-        if (rb.velocity.x <= 0)
+        if (rb.velocity.x <= -3)
         {
             m_SpriteRenderer.flipX = true;
             animator.SetBool("idle", false);
         }
-        if (rb.velocity.x >= 0)
+        if (rb.velocity.x >= 3)
         {
             m_SpriteRenderer.flipX = false;
             animator.SetBool("idle", false);
         }
-        if (rb.velocity.x == 0)
+        if (rb.velocity.x < 3 && rb.velocity.x > -3)
         {
             animator.SetBool("idle", true);
         }

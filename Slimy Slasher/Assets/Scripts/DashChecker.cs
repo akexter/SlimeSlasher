@@ -18,7 +18,7 @@ public class DashChecker : MonoBehaviour
 
     void Update()
     {
-        if (player.GetComponent<PlayerCtrl>().canDash == true)
+        if (player.GetComponent<PlayerCtrl>().canDash == true && player.GetComponent<PlayerCtrl>().dashUnlocked == true)
         {
             alpha = 1f;
             color = new Color(1f, 1f, 1f, alpha);

@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7456790732588210944}
   - component: {fileID: 5666218856371887166}
   - component: {fileID: 6359419812210720826}
-  - component: {fileID: 867286588098292410}
   m_Layer: 6
   m_Name: weaponPrefab
   m_TagString: Untagged
@@ -103,6 +102,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 768
+  angle: 0
+  damage: 1
 --- !u!70 &5666218856371887166
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -138,16 +139,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &867286588098292410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8441059548629821776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 293190ce72ff0064599a9a0cfa1ac611, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slimeBall: {fileID: 1759713985400094518, guid: ac5eccf55e402d34b9fae9ccc7c92530, type: 3}

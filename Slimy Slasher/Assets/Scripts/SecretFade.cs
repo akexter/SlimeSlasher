@@ -21,9 +21,10 @@ public class SecretFade : MonoBehaviour
             gameObject.GetComponent<Tilemap>().color = new Color(1f, 1f, 1f, alpha);
         }
 
-        if (player.GetComponent<PlayerCtrl>().Restart == true)
+        if (player.GetComponent<PlayerHealth>().health <= 0)
         {
             alpha = 1f;
+            GetComponentInChildren<SecretActivator>().isTriggered = false;
         }
     }
 }

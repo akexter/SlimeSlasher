@@ -8,6 +8,7 @@ public class Slash : MonoBehaviour
     public GameObject Player;
     public LayerMask layerMask;
     public float angle;
+    public float damage;
 
     void Start()
     {

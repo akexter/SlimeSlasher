@@ -16,7 +16,7 @@ public class SlimeBall : MonoBehaviour
 
     void Update()
     {
-        if (Time.time >= creationTime + 2f)
+        if (Time.time >= creationTime + 3f)
         {
             Destroy(gameObject);
         }
@@ -24,6 +24,9 @@ public class SlimeBall : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        if (Time.time > creationTime + 0.25f)
+        {
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        }
     }
 }
