@@ -36,7 +36,7 @@ public class TransitionScreen : MonoBehaviour
     }
     void TaskOnClick()
     {
-        clickTime = Time.time;
+        clickTime = Time.timeSinceLevelLoad;
     }
     void Update()
     {
@@ -60,7 +60,7 @@ public class TransitionScreen : MonoBehaviour
             }
         }
 
-        if (Time.time >= clickTime + 4f && clickTime != 0)
+        if (Time.timeSinceLevelLoad >= clickTime + 4f && clickTime != 0)
         {
             Destroy(gameObject);
         }

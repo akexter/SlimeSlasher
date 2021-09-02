@@ -15,11 +15,11 @@ public class OnClickLoadScene : MonoBehaviour
     }
     void TaskOnClick()
     {
-        clickTime = Time.time;
+        clickTime = Time.timeSinceLevelLoad;
     }
     void Update()
     {
-        if (Time.time >= clickTime + 1f && clickTime != 0)
+        if (Time.timeSinceLevelLoad >= clickTime + 1f && clickTime != 0)
         {
             SceneManager.LoadScene("Main Game", LoadSceneMode.Single);
         }

@@ -12,7 +12,8 @@ public class PlayerCtrl : MonoBehaviour
     public float dash;
     public float lastHit;
     public float lastGravity;
-    float goThroughPlatform;
+    public float teleportTimer;
+    public float goThroughPlatform;
 
     public bool canBounce;
     public bool canDash;
@@ -79,17 +80,17 @@ public class PlayerCtrl : MonoBehaviour
             checkPoint = new Vector2(Mathf.Round(gameObject.transform.position.x) - lastDirection / 2, gameObject.transform.position.y);
         }
 
-        if (isHit == true && Time.time >= lastHit + 1f && Time.time < lastHit + 1.1f && GetComponent<PlayerHealth>().health > 0) // Changes the player's position after touching spikes
+        if (isHit == true && Time.timeSinceLevelLoad >= lastHit + 1f && Time.timeSinceLevelLoad < lastHit + 1.1f && GetComponent<PlayerHealth>().health > 0) // Changes the player's position after touching spikes
         {
             transform.position = checkPoint;
         }
 
-        if (isHit == true && Time.time >= lastHit + 1.1f && Time.time <= lastHit + 1.2f && GetComponent<PlayerHealth>().health <= 0) // Changes the player's position to the start after dying
+        if (isHit == true && Time.timeSinceLevelLoad >= lastHit + 1.1f && Time.timeSinceLevelLoad <= lastHit + 1.2f && GetComponent<PlayerHealth>().health <= 0) // Changes the player's position to the start after dying
         {
             SceneManager.LoadScene("Main Game", LoadSceneMode.Single);
         }
 
-        if (Time.time >= lastHit + 2f && isHit == true && GetComponent<PlayerHealth>().health > 0) // Allows the player to move after the death transition
+        if (Time.timeSinceLevelLoad >= lastHit + 2f && isHit == true && GetComponent<PlayerHealth>().health > 0) // Allows the player to move after the death transition
         {
             enemyHit = false;
             fixedVelocity = false;
@@ -110,6 +111,11 @@ public class PlayerCtrl : MonoBehaviour
         if (GetComponent<PlayerHealth>().health <= 0)
         {
             isHit = true;
+        }
+
+        if (Time.timeSinceLevelLoad >= teleportTimer + 1.5f && teleportTimer != 0)
+        {
+            SceneManager.LoadScene("End Screen", LoadSceneMode.Single);
         }
 
         Jump();
@@ -141,7 +147,7 @@ public class PlayerCtrl : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift)) // Initiates the dash
             {
-                if (canDash == true && start == true && Time.time >= dash + 1f)
+                if (canDash == true && start == true && Time.timeSinceLevelLoad >= dash + 1f)
                 {
                     if (Input.GetAxis("Horizontal") == 1 || Input.GetAxis("Horizontal") == -1)
                     {
@@ -152,12 +158,12 @@ public class PlayerCtrl : MonoBehaviour
                     fixedVelocity = true;
                     rb.velocity = new Vector2(16f * lastDirection, 0f);
                     rb.gravityScale = 0f;
-                    dash = Time.time;
+                    dash = Time.timeSinceLevelLoad;
                     rb.constraints = RigidbodyConstraints2D.FreezePositionY;
                 }
             }
 
-            if (Time.time >= dash + 0.25f && canDash == false) // Ends the dash
+            if (Time.timeSinceLevelLoad >= dash + 0.25f && canDash == false) // Ends the dash
             {
                 fixedVelocity = false;
                 rb.gravityScale = lastGravity;
@@ -166,7 +172,7 @@ public class PlayerCtrl : MonoBehaviour
                 rb.rotation = 0f;
             }
 
-            if (Time.time >= dash + 1f && canDash == false) // Allows the player to dash again
+            if (Time.timeSinceLevelLoad >= dash + 1f && canDash == false) // Allows the player to dash again
             {
                 RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), Vector2.down, Mathf.Infinity, layerMask);
 
@@ -184,14 +190,14 @@ public class PlayerCtrl : MonoBehaviour
         {
             Physics2D.IgnoreLayerCollision(7, 12, true);
         }
-        if (rb.velocity.y < 0 && Input.GetKey(KeyCode.S) == false && Time.time >= goThroughPlatform + 0.25f)
+        if (rb.velocity.y < 0 && Input.GetKey(KeyCode.S) == false && Time.timeSinceLevelLoad >= goThroughPlatform + 0.25f)
         {
             Physics2D.IgnoreLayerCollision(7, 12, false);
         }
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
             Physics2D.IgnoreLayerCollision(7, 12, true);
-            goThroughPlatform = Time.time;
+            goThroughPlatform = Time.timeSinceLevelLoad;
         }
     }
 
@@ -202,14 +208,14 @@ public class PlayerCtrl : MonoBehaviour
             transform.parent = other.transform;
         }
 
-        if (other.gameObject.CompareTag("spikes") && Time.time >= lastHit + 2f) // Reset's the player's position upon coming into contact with spikes
+        if (other.gameObject.CompareTag("spikes") && Time.timeSinceLevelLoad >= lastHit + 2f) // Reset's the player's position upon coming into contact with spikes
         {
             isHit = true;
-            lastHit = Time.time;
+            lastHit = Time.timeSinceLevelLoad;
             fixedVelocity = true;
             freeze = true;
         }
-        if (other.gameObject.CompareTag("enemy") && Time.time >= lastHit + 2f && enemyHit == false) // Throws the player back upon colliding with 
+        if (other.gameObject.CompareTag("enemy") && Time.timeSinceLevelLoad >= lastHit + 2f && enemyHit == false) // Throws the player back upon colliding with 
         {
             rb.velocity = new Vector2(0f, 0f);
             rb.gravityScale = lastGravity;
@@ -225,7 +231,7 @@ public class PlayerCtrl : MonoBehaviour
             }
 
             fixedVelocity = true;
-            lastHit = Time.time;
+            lastHit = Time.timeSinceLevelLoad;
             enemyHit = true;
             Physics2D.IgnoreLayerCollision(7, 8, true);
             dash = 0f;
@@ -270,7 +276,13 @@ public class PlayerCtrl : MonoBehaviour
 
         if (other.gameObject.CompareTag("checkpoint"))
         {
-            SceneManager.LoadScene("End Screen", LoadSceneMode.Single);
+            isHit = true;
+            lastHit = Time.timeSinceLevelLoad;
+            freeze = true;
+            if (teleportTimer == 0)
+            {
+                teleportTimer = Time.timeSinceLevelLoad;
+            }
         }
     }
     void OnCollisionExit2D(Collision2D other)

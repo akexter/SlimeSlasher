@@ -17,9 +17,9 @@ public class SlimeMaker : MonoBehaviour
     }
     void Update()
     {
-        if (Time.time >= slimeCooldown + frequency + Random.Range(-frequency/2, frequency/2))
+        if (Time.timeSinceLevelLoad >= slimeCooldown + frequency + Random.Range(-frequency/2, frequency/2))
         {
-            slimeCooldown = Time.time;
+            slimeCooldown = Time.timeSinceLevelLoad;
             Instantiate(slimeBall, new Vector2(transform.position.x + Random.Range(-0.05f, 0.05f), transform.position.y + Random.Range(-0.05f, 0.05f)), transform.rotation);
         }
 

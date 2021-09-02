@@ -14,9 +14,9 @@ public class Weapon : MonoBehaviour
         {
             Instantiate(weaponPrefab, transform.position, transform.rotation);
             canAttack = false;
-            lastAttack = Time.time;
+            lastAttack = Time.timeSinceLevelLoad;
         }
-        if(canAttack == false && weaponUnlocked == true && Time.time >= lastAttack + 0.5)
+        if(canAttack == false && weaponUnlocked == true && Time.timeSinceLevelLoad >= lastAttack + 0.5)
         {
             canAttack = true;
         }

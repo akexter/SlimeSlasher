@@ -18,13 +18,13 @@ public class BlackScreen : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (player.GetComponent<PlayerCtrl>().isHit == true && alpha <= 1 && Time.time >= player.GetComponent<PlayerCtrl>().lastHit + 0.5f)
+        if (player.GetComponent<PlayerCtrl>().isHit == true && alpha <= 1 && Time.timeSinceLevelLoad >= player.GetComponent<PlayerCtrl>().lastHit + 0.5f)
         {
             alpha += 0.1f;
             color = new Color(1f, 1f, 1f, alpha);
             m_SpriteRenderer.color = color;
         }
-        if (player.GetComponent<PlayerCtrl>().isHit == false && alpha >= 0 && Time.time >= player.GetComponent<PlayerCtrl>().lastHit + 1.25f)
+        if (player.GetComponent<PlayerCtrl>().isHit == false && alpha >= 0 && Time.timeSinceLevelLoad >= player.GetComponent<PlayerCtrl>().lastHit + 1.25f)
         {
             alpha -= 0.05f;
             color = new Color(1f, 1f, 1f, alpha);
