@@ -51,7 +51,7 @@ public class HealthPip : MonoBehaviour
         }
         else
         {
-            gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f);
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0f);
         }
         if (healthNumber > Player.GetComponent<PlayerHealth>().maxHealth) // Makes the pip disppear when its healthNumber is greater than the maximum health
         {

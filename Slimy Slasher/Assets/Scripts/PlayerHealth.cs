@@ -26,14 +26,14 @@ public class PlayerHealth : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("spikes") && Time.timeSinceLevelLoad >= lastHit + 2f)
+        if (other.gameObject.CompareTag("spikes") && Time.timeSinceLevelLoad >= lastHit + 2f) // Prevents the player from instantly dying from spikes
         {
             hit = true;
             health -= 1;
             lastHit = Time.timeSinceLevelLoad;
             transparencyChange = Time.timeSinceLevelLoad;
         }
-        if (other.gameObject.CompareTag("enemy") && Time.timeSinceLevelLoad >= lastHit + 2f)
+        if (other.gameObject.CompareTag("enemy") && Time.timeSinceLevelLoad >= lastHit + 2f) // Prevents the player from instantly dying from an enemy
         {
             hit = true;
             health -= 1;
@@ -43,7 +43,7 @@ public class PlayerHealth : MonoBehaviour
     }
     void Update()
     {
-        if (Time.timeSinceLevelLoad > 3f)
+        if (Time.timeSinceLevelLoad > 3f) // Controls how the player's health behaves
         {
             if (health > maxHealth)
             {
@@ -54,7 +54,7 @@ public class PlayerHealth : MonoBehaviour
                 beforeHitHealth = health;
                 m_Spriterenderer.color = new Color(1f, 1f, 1f, 0.5f);
             }
-            if (Time.timeSinceLevelLoad >= lastHit + 2f && Time.timeSinceLevelLoad < lastHit + 3f && Time.timeSinceLevelLoad > transparencyChange + 0.15f) // Switches between transparent and opaque to show the hit invulnerability ending
+            if (Time.timeSinceLevelLoad >= lastHit + 1f && Time.timeSinceLevelLoad < lastHit + 2f && Time.timeSinceLevelLoad > transparencyChange + 0.15f) // Switches between transparent and opaque to show the hit invulnerability ending
             {
                 transparent = !transparent;
 
@@ -69,7 +69,7 @@ public class PlayerHealth : MonoBehaviour
 
                 transparencyChange = Time.timeSinceLevelLoad;
             }
-            if (Time.timeSinceLevelLoad >= lastHit + 3f)
+            if (Time.timeSinceLevelLoad >= lastHit + 2f)
             {
                 hit = false;
                 m_Spriterenderer.color = new Color(1f, 1f, 1f, 1f);

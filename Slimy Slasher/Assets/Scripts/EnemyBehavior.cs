@@ -73,6 +73,13 @@ public class EnemyBehavior : MonoBehaviour
         {
             transform.position = startPos;
         }
+
+        if (GetComponent<EnemyHealth>().hurt == true)
+        {
+            rb.velocity = new Vector2(0f, 0f);
+            lastAction = Time.time;
+            nextAction = Mathf.Round(Random.Range(3f, 6f));
+        }
     }
 
     private void OnDrawGizmosSelected()

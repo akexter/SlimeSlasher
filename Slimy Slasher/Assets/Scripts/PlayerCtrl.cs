@@ -156,14 +156,14 @@ public class PlayerCtrl : MonoBehaviour
 
                     canDash = false;
                     fixedVelocity = true;
-                    rb.velocity = new Vector2(16f * lastDirection, 0f);
+                    rb.velocity = new Vector2(20f * lastDirection, 0f);
                     rb.gravityScale = 0f;
                     dash = Time.timeSinceLevelLoad;
                     rb.constraints = RigidbodyConstraints2D.FreezePositionY;
                 }
             }
 
-            if (Time.timeSinceLevelLoad >= dash + 0.25f && canDash == false) // Ends the dash
+            if (Time.timeSinceLevelLoad >= dash + 0.2f && canDash == false) // Ends the dash
             {
                 fixedVelocity = false;
                 rb.gravityScale = lastGravity;
@@ -248,8 +248,7 @@ public class PlayerCtrl : MonoBehaviour
         {
             if (GetComponent<Weapon>().canAttack == false && canBounce == true)
             {
-                rb.velocity = new Vector2(rb.velocity.x, 0f);
-                rb.AddForce(new Vector2(0f, 2 * jumpForce / 3));
+                rb.velocity = new Vector2(rb.velocity.x, 5f);
                 canBounce = false;
             }
         }

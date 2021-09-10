@@ -18,31 +18,35 @@ public class PlayerAnim : MonoBehaviour
 
     void Update()
     {
-        if (rb.velocity.x <= -3)
+        if(Input.GetKeyDown(KeyCode.A) || (Input.GetKeyDown(KeyCode.LeftArrow)))
         {
             m_SpriteRenderer.flipX = true;
             animator.SetBool("idle", false);
         }
-        if (rb.velocity.x >= 3)
+        if (Input.GetKeyDown(KeyCode.D) || (Input.GetKeyDown(KeyCode.RightArrow)))
         {
             m_SpriteRenderer.flipX = false;
             animator.SetBool("idle", false);
         }
-        if (rb.velocity.x < 3 && rb.velocity.x > -3)
+        if (rb.velocity.x == 0)
         {
             animator.SetBool("idle", true);
         }
-        if (rb.velocity.y <= -5)
+        else
+        {
+            animator.SetBool("idle", false);
+        }
+        if (rb.velocity.y <= -1)
         {
             animator.SetBool("falling", true);
             animator.SetBool("jumping", false);
         }
-        if (rb.velocity.y >= 5)
+        if (rb.velocity.y >= 1)
         {
             animator.SetBool("jumping", true);
             animator.SetBool("falling", false);
         }
-        if (rb.velocity.y < 5 && rb.velocity.y > -5)
+        if (rb.velocity.y < 1 && rb.velocity.y > -1)
         {
             animator.SetBool("jumping", false);
             animator.SetBool("falling", false);

@@ -24,11 +24,5 @@ public class ItemDisappear : MonoBehaviour
             color = new Color(1f, 1f, 1f, alpha);
             m_SpriteRenderer.color = color;
         }
-
-        if (player.GetComponent<PlayerHealth>().health <= 0)
-        {
-            alpha = 1f;
-            isTriggered = false;
-        }
     }
 }

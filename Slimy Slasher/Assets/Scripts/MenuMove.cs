@@ -13,7 +13,7 @@ public class MenuMove : MonoBehaviour
         direction = Mathf.Round(Random.Range(1, 4));
     }
 
-    void Update()
+    void Update() // Randomly determines what direction the backdrop of the menu should move in
     {
 
         if (direction == 1f)

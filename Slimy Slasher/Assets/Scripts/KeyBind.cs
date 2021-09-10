@@ -86,19 +86,13 @@ public class KeyBind : MonoBehaviour
         {
             animator.SetBool("keydown", false);
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && Key == 10 || Input.GetKeyDown(KeyCode.RightShift) && Key == 10)
         {
-            if(Key == 10)
-            {
-                animator.SetBool("keydown", true);
-            }
+            animator.SetBool("keydown", true);
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+        if (Input.GetKeyUp(KeyCode.LeftShift) && Key == 10 || Input.GetKeyUp(KeyCode.RightShift) && Key == 10)
         {
-            if(Key == 10)
-            {
-                animator.SetBool("keydown", false);
-            }
+            animator.SetBool("keydown", false);
         }
     }
 }

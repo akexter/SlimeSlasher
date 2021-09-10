@@ -17,7 +17,7 @@ public class SlimeMaker : MonoBehaviour
     }
     void Update()
     {
-        if (Time.timeSinceLevelLoad >= slimeCooldown + frequency + Random.Range(-frequency/2, frequency/2))
+        if (Time.timeSinceLevelLoad >= slimeCooldown + frequency + Random.Range(-frequency/2, frequency/2)) // Determines when a slime ball should be created
         {
             slimeCooldown = Time.timeSinceLevelLoad;
             Instantiate(slimeBall, new Vector2(transform.position.x + Random.Range(-0.05f, 0.05f), transform.position.y + Random.Range(-0.05f, 0.05f)), transform.rotation);
@@ -32,7 +32,7 @@ public class SlimeMaker : MonoBehaviour
             burst = 0;
         }
 
-        if (burst == 1)
+        if (burst == 1) // Makes a large number of slime balls when the player is hurt
         {
             Instantiate(slimeBall, new Vector2(transform.position.x + Random.Range(-0.05f, 0.05f), transform.position.y + Random.Range(-0.05f, 0.05f)), transform.rotation);
             Instantiate(slimeBall, new Vector2(transform.position.x + Random.Range(-0.05f, 0.05f), transform.position.y + Random.Range(-0.05f, 0.05f)), transform.rotation);

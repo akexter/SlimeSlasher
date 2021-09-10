@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 1863999838768273536}
   - component: {fileID: 1863999838768273542}
   m_Layer: 3
-  m_Name: Cube 1
+  m_Name: Cube
   m_TagString: checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -352,7 +352,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1863999839309263916}
   - component: {fileID: 1863999839309263918}
-  - component: {fileID: 1863999839309263912}
   - component: {fileID: 1863999839309263917}
   m_Layer: 3
   m_Name: Square
@@ -426,18 +425,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1863999839309263912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1863999839309263923}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53759da937812684494d80e8bb420687, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!58 &1863999839309263917
 CircleCollider2D:
   m_ObjectHideFlags: 0
